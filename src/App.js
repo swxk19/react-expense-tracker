@@ -18,7 +18,7 @@ function App() {
 
   const fetchLogs = async () => {
     const res = await fetch(
-      'http://localhost:5000/logs'
+      'https://swxk19-react-expense-tracker.herokuapp.com/logs'
     )
 
     const data = await res.json()
@@ -64,11 +64,11 @@ function App() {
 
 
 
-    await fetch(`http://localhost:5000/logs/${log.id}`, {
+    await fetch(`https://swxk19-react-expense-tracker.herokuapp.com/logs/${log.id}`, {
       method: 'DELETE'
     })
 
-    await fetch(`http://localhost:5000/people/${updOwer.id}`, {
+    await fetch(`https://swxk19-react-expense-tracker.herokuapp.com/people/${updOwer.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
@@ -76,7 +76,7 @@ function App() {
       body: JSON.stringify(updOwer)
     })
 
-    await fetch(`http://localhost:5000/people/${updPayer.id}`, {
+    await fetch(`https://swxk19-react-expense-tracker.herokuapp.com/people/${updPayer.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
@@ -96,7 +96,7 @@ function App() {
 
   const fetchPeople = async () => {
     const res = await fetch(
-      'http://localhost:5000/people'
+      'https://swxk19-react-expense-tracker.herokuapp.com/people'
     )
 
     const data = await res.json()
@@ -111,7 +111,7 @@ function App() {
 
   
     const res = await fetch(
-      `http://localhost:5000/people/${filtered[0].id}`
+      `https://swxk19-react-expense-tracker.herokuapp.com/people/${filtered[0].id}`
     )
     
     const data = await res.json()
@@ -131,7 +131,7 @@ function App() {
     }
 
     const res = await fetch(`
-    http://localhost:5000/people`, {
+    https://swxk19-react-expense-tracker.herokuapp.com/people`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -157,7 +157,7 @@ function App() {
     }
 
     const res = await fetch(
-    `http://localhost:5000/logs`, {
+    `https://swxk19-react-expense-tracker.herokuapp.com/logs`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -194,7 +194,7 @@ function App() {
     }
 
     const resOwer = await fetch(
-      `http://localhost:5000/people/${updOwer.id}`, {
+      `https://swxk19-react-expense-tracker.herokuapp.com/people/${updOwer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
@@ -204,7 +204,7 @@ function App() {
     )
 
     const resPayer = await fetch(
-      `http://localhost:5000/people/${updPayer.id}`, {
+      `https://swxk19-react-expense-tracker.herokuapp.com/people/${updPayer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
