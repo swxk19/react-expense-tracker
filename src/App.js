@@ -45,7 +45,6 @@ function App() {
 
 
   const deleteLog = async (log) => {
-    console.log(log)
     const proceed = window.confirm("Delete log?")
 
     if (!proceed) return 
@@ -106,10 +105,12 @@ function App() {
 
   const fetchPerson = async (name) => {
 
-    const id = await people.filter((person) => person.name === name)[0].id
+    const filtered = await people.filter((person) => person.name === name)[0]
+
+    if (filtered === undefined) return true
 
     const res = await fetch(
-      `http://localhost:5000/people/${id}`
+      `http://localhost:5000/people/${filtered.id}`
     )
     
     const data = await res.json()
@@ -171,10 +172,10 @@ function App() {
 
   const addExpense = async (info) => {
 
-    const ower = await fetchPerson(info.ower.toUpperCase())
-    const payer = await fetchPerson(info.payer.toUpperCase())
+    const ower = await fetchPerson(info.ower)
+    const payer = await fetchPerson(info.payer)
 
-    if (!ower.name || !payer.name) {
+    if (ower  || payer) {
       alert("Ower or Payer does not exist")
       return
     }

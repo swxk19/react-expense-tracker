@@ -10,6 +10,7 @@ const AddExpense = ({onAddExpense},) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
+
         if (!payer || !ower || !amount) {
             alert('Missing fields!')
             return 
