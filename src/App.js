@@ -105,12 +105,13 @@ function App() {
 
   const fetchPerson = async (name) => {
 
-    const filtered = await people.filter((person) => person.name === name)[0]
+    const filtered = await people.filter((person) => person.name === name.toUpperCase())
+    
+    if (filtered.length === 0) return false
 
-    if (filtered === undefined) return true
-
+  
     const res = await fetch(
-      `http://localhost:5000/people/${filtered.id}`
+      `http://localhost:5000/people/${filtered[0].id}`
     )
     
     const data = await res.json()
@@ -175,7 +176,10 @@ function App() {
     const ower = await fetchPerson(info.ower)
     const payer = await fetchPerson(info.payer)
 
-    if (ower  || payer) {
+    console.log(ower)
+    console.log("addex" + await ower)
+
+    if (!ower  || !payer) {
       alert("Ower or Payer does not exist")
       return
     }
