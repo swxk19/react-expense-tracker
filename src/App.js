@@ -4,7 +4,7 @@ import People from './components/People'
 import AddPerson from './components/AddPerson'
 import Footer from './components/Footer'
 import LogPage from './components/LogPage'
-import {dateTime} from './Constants.js'
+import {dateTime, JSON_API} from './Constants.js'
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import {useEffect, useState} from 'react'
@@ -20,7 +20,7 @@ function App() {
 
   const fetchLogs = async () => {
     const res = await fetch(
-      'http://localhost:5000/logs'
+      `${JSON_API}/logs`
     )
 
     const data = await res.json()
@@ -66,11 +66,11 @@ function App() {
 
 
 
-    await fetch(`http://localhost:5000/logs/${log.id}`, {
+    await fetch(`${JSON_API}/logs/${log.id}`, {
       method: 'DELETE'
     })
 
-    await fetch(`http://localhost:5000/people/${updOwer.id}`, {
+    await fetch(`${JSON_API}/people/${updOwer.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
@@ -78,7 +78,7 @@ function App() {
       body: JSON.stringify(updOwer)
     })
 
-    await fetch(`http://localhost:5000/people/${updPayer.id}`, {
+    await fetch(`${JSON_API}/people/${updPayer.id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
@@ -98,7 +98,7 @@ function App() {
 
   const fetchPeople = async () => {
     const res = await fetch(
-      'http://localhost:5000/people'
+      `${JSON_API}/people`
     )
 
     const data = await res.json()
@@ -113,7 +113,7 @@ function App() {
 
   
     const res = await fetch(
-      `http://localhost:5000/people/${filtered[0].id}`
+      `${JSON_API}/people/${filtered[0].id}`
     )
     
     const data = await res.json()
@@ -134,7 +134,7 @@ function App() {
     }
 
     const res = await fetch(`
-    http://localhost:5000/people`, {
+    ${JSON_API}/people`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -160,7 +160,7 @@ function App() {
     }
 
     const res = await fetch(
-    `http://localhost:5000/logs`, {
+    `${JSON_API}/logs`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -189,7 +189,7 @@ function App() {
   
 
     await fetch(
-      `http://localhost:5000/people/${updOwer.id}`, {
+      `${JSON_API}/people/${updOwer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
@@ -207,7 +207,7 @@ function App() {
     }
 
     await fetch(
-      `http://localhost:5000/people/${updPayer.id}`, {
+      `${JSON_API}/people/${updPayer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
@@ -249,7 +249,7 @@ function App() {
     }
 
     await fetch(
-      `http://localhost:5000/people/${updOwer.id}`, {
+      `${JSON_API}/people/${updOwer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
@@ -259,7 +259,7 @@ function App() {
     )
 
      await fetch(
-      `http://localhost:5000/people/${updPayer.id}`, {
+      `${JSON_API}/people/${updPayer.id}`, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
