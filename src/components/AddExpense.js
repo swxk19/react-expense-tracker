@@ -26,7 +26,7 @@ const AddExpense = ({onAddExpense},) => {
         <form className = 'add-form' onSubmit = {onSubmit}>
         <div className = 'form-control'>
             <label>Ower </label>
-            <input type = 'text' placeholder = 'Name'
+            <input type = 'text' placeholder = 'Name or "All"'
             value = {ower} onChange = {(e) => setOwer(e.target.value)}></input>
         </div>
 
