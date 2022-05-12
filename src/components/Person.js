@@ -3,8 +3,8 @@ const Person = ({person}) => {
   return (
     <div className = 'person'>
     <h4>{person.name}</h4>
-    <p>Paid for: ${(person.paidFor)}</p>
-    <p>Owe: ${(person.owe)}</p>
+    <p>Paid for: ${(parseFloat(person.paidFor))}</p>
+    <p>Owe: ${(parseFloat(person.owe))}</p>
     </div>
   )
 }
