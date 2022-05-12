@@ -4,19 +4,19 @@
       "id": 1,
       "name": "KE",
       "paidFor": 0,
-      "owe": "-0.00"
+      "owe": 0
     },
     {
       "id": 2,
       "name": "CY",
-      "paidFor": "-0.00",
+      "paidFor": 0,
       "owe": 0
     },
     {
       "id": 3,
       "name": "JH",
       "paidFor": 0,
-      "owe": "-0.00"
+      "owe": 0
     }
   ],
   "logs": []
