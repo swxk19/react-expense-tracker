@@ -1,18 +1,18 @@
 import {useState} from 'react'
 
 
-const AddExpense = ({onAddExpense, people}) => {
+const AddExpense = ({onAddExpense, onAddExpenseAll, people}) => {
 
     const [payer, setPayer] = useState('')
     const [ower, setOwer] = useState('')
     const [amount, setAmount] = useState('')
 
-    const sendIt = (ower) => {
-        console.log(ower)
-        onAddExpense({ower, payer, amount})
+    const sendIt = (owers) => {
+        const sharedAmount = amount / people.length
+        onAddExpenseAll({owers, payer, sharedAmount})
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
 
 
@@ -23,11 +23,8 @@ const AddExpense = ({onAddExpense, people}) => {
 
         if (ower.toUpperCase() === "ALL") {
             const owers = people.filter((person) => person.name !== payer.toUpperCase())
-            console.log(owers)
-            for (let i = 0; i < owers.length; i++) {
-                console.log(owers[i])
-                sendIt(owers[i].name)
-            }
+
+            sendIt(owers)
 
         } else { 
             onAddExpense({ower, payer, amount})

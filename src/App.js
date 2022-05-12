@@ -4,16 +4,18 @@ import People from './components/People'
 import AddPerson from './components/AddPerson'
 import Footer from './components/Footer'
 import LogPage from './components/LogPage'
+import {dateTime} from './Constants.js'
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 
 
 function App() {
-
+  
   const [showAddPerson, setShowAddPerson] = useState(false)
   const [people, setPeople] = useState([])
   const [logs, setLogs] = useState([])
+
 
 
   const fetchLogs = async () => {
@@ -55,11 +57,11 @@ function App() {
 
     const updOwer = {
       ...ower,
-      owe: parseFloat(ower.owe) - parseFloat(log.amount)
+      owe: (parseFloat(ower.owe) - parseFloat(log.amount)).toFixed(2)
     }
     const updPayer = {
       ...payer,
-      paidFor: parseFloat(payer.paidFor) - parseFloat(log.amount)
+      paidFor: (parseFloat(payer.paidFor) - parseFloat(log.amount)).toFixed(2)
     }
 
 
@@ -106,7 +108,7 @@ function App() {
   const fetchPerson = async (name) => {
 
     const filtered = await people.filter((person) => person.name === name.toUpperCase())
-    
+
     if (filtered.length === 0) return false
 
   
@@ -122,6 +124,7 @@ function App() {
 
 
   const addPerson = async (name) => {
+
     
     const newPerson = {
       id: people.length + 1,
@@ -148,12 +151,12 @@ function App() {
   }
 
   const addLog = async (info) => {
-
     const newLog = {
-      id: logs.length + 1,
+      id: Math.floor(Math.random() * 10000) + (Math.random() * 10),
       ...info,
       ower: info.ower.toUpperCase(),
-      payer: info.payer.toUpperCase()
+      payer: info.payer.toUpperCase(),
+      time: dateTime
     }
 
     const res = await fetch(
@@ -171,12 +174,66 @@ function App() {
 
   } 
 
+  const addExpenseAll = async (info) => {
+    console.log(info)
+    if (info.owers.length <= 0) {
+      console.log("broke here")
+      return
+    }
+
+    const ower = await fetchPerson(info.owers[info.owers.length - 1].name)
+    const updOwer = {
+      ...ower,
+      owe: (parseFloat(ower.owe) + info.sharedAmount).toFixed(2)
+    }
+  
+
+    await fetch(
+      `http://localhost:5000/people/${updOwer.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updOwer)
+      }
+    )
+    
+    
+
+    const payer = await fetchPerson(info.payer)
+    const updPayer = {
+      ...payer,
+      paidFor: (parseFloat(payer.paidFor) + info.sharedAmount).toFixed(2)
+    }
+
+    await fetch(
+      `http://localhost:5000/people/${updPayer.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updPayer)
+      })
+
+      const newOwers = info.owers.slice(0, info.owers.length -1)
+
+      addLog({ower: ower.name, payer: payer.name, amount: info.sharedAmount})
+
+      setPeople(people.map((person) => 
+      person.name === updOwer.name ? {...person, owe : (parseFloat(person.owe) + parseFloat(info.sharedAmount)).toFixed(2)} : 
+      person.name === updPayer.name ? {...person, paidFor : (parseFloat(person.paidFor) + parseFloat(info.sharedAmount)).toFixed(2)} :
+      person
+    ))
+
+    
+      addExpenseAll({...info, owers: newOwers})
+  }
+
   const addExpense = async (info) => {
 
     const ower = await fetchPerson(info.ower)
     const payer = await fetchPerson(info.payer)
 
-    
     if (!ower  || !payer) {
       alert("Ower or Payer does not exist")
       return
@@ -191,7 +248,7 @@ function App() {
       paidFor: parseFloat(payer.paidFor) + parseFloat(info.amount)
     }
 
-    const resOwer = await fetch(
+    await fetch(
       `http://localhost:5000/people/${updOwer.id}`, {
         method: 'PUT',
         headers: {
@@ -201,7 +258,7 @@ function App() {
       }
     )
 
-    const resPayer = await fetch(
+     await fetch(
       `http://localhost:5000/people/${updPayer.id}`, {
         method: 'PUT',
         headers: {
@@ -235,7 +292,7 @@ function App() {
         title = 'Add Expenses' 
         showAddPerson = {showAddPerson}/>
         {showAddPerson && <AddPerson onAddPerson = {addPerson}/>}
-        <AddExpense onAddExpense = {addExpense} people = {people}/>
+        <AddExpense onAddExpense = {addExpense} onAddExpenseAll = {addExpenseAll} people = {people}/>
         <People people = {people}/></> }/>
 
         <Route path = '/logs' 

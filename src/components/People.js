@@ -1,5 +1,5 @@
 import Person from './Person'
-import {FaTimes} from 'react-icons/fa'
+// import {FaTimes} from 'react-icons/fa'
 
 const People = ({people}) => {
   return (
