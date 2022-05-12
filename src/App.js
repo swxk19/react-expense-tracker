@@ -295,7 +295,7 @@ function App() {
         <AddExpense onAddExpense = {addExpense} onAddExpenseAll = {addExpenseAll} people = {people}/>
         <People people = {people}/></> }/>
 
-        <Route path = '/log' 
+        <Route path = '/logs' 
         element = {<LogPage logs = {logs} onDelete = {deleteLog} />}/>
 
       </Routes>
