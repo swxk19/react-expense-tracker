@@ -16,6 +16,11 @@ const AddExpense = ({onAddExpense},) => {
             return 
         }
 
+        for (let i = 0; i < 4; i++ ) {
+            setAmount(i)
+            console.log(amount)
+        }
+
         onAddExpense({ower, payer, amount})
         setPayer('')
         setOwer('')
