@@ -6,7 +6,7 @@ const Footer = () => {
   
   return (
     <footer className = 'footer'>
-        {location.pathname === '/' && <Link to = '/logs'>Logs</Link>}
+        {location.pathname === '/' && <Link to = '/log'>Logs</Link>}
     </footer>
   )
 }
