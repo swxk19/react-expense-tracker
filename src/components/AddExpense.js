@@ -52,7 +52,7 @@ const AddExpense = ({onAddExpense, onAddExpenseAll, people}) => {
 
         <div className = 'form-control2'>
         <label>$</label>
-            <input inputMode = 'numeric'type = 'number' placeholder = 'Amount'
+            <input inputMode = 'numeric'type = 'float' placeholder = 'Amount'
             value = {amount} onChange = {(e) => setAmount(e.target.value)}></input>
         </div>
 
