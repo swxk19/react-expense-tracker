@@ -1,6 +1,7 @@
 # Expense Tracker App
 
 Built for learning/practice purposes.&nbsp;
+Tracks who owes who how much.
 
 ## Demo
 
