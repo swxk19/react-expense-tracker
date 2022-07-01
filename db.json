@@ -3,21 +3,64 @@
     {
       "id": 1,
       "name": "KE",
-      "paidFor": 0,
-      "owe": "-0.00"
+      "paidFor": "-0.00",
+      "owe": 6,
+      "personalLog": [
+        "KE owes CY 1"
+      ]
     },
     {
       "id": 2,
       "name": "CY",
-      "paidFor": "-0.00",
-      "owe": 0
+      "paidFor": 6,
+      "owe": "-0.00",
+      "personalLog": [
+        "KE owes CY 1"
+      ]
     },
     {
       "id": 3,
       "name": "JH",
       "paidFor": 0,
-      "owe": "-0.00"
+      "owe": "-0.00",
+      "personalLog": []
     }
   ],
-  "logs": []
+  "logs": [
+    {
+      "id": 8188.477538478417,
+      "ower": "KE",
+      "payer": "CY",
+      "amount": "1",
+      "time": "Jun 07 7:51 PM"
+    },
+    {
+      "id": 605.5953864036569,
+      "ower": "KE",
+      "payer": "CY",
+      "amount": "1",
+      "time": "Jun 07 8:07 PM"
+    },
+    {
+      "id": 8305.520175156133,
+      "ower": "KE",
+      "payer": "CY",
+      "amount": "1",
+      "time": "Jun 07 8:12 PM"
+    },
+    {
+      "id": 4794.783572022118,
+      "ower": "KE",
+      "payer": "CY",
+      "amount": "2",
+      "time": "Jun 07 8:12 PM"
+    },
+    {
+      "id": 8081.955252892355,
+      "ower": "KE",
+      "payer": "CY",
+      "amount": "1",
+      "time": "Jun 07 8:14 PM"
+    }
+  ]
 }

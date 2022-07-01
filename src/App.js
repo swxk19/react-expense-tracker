@@ -1,13 +1,13 @@
-import Header from './components/Header'
+import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import AddExpense from './components/AddExpense'
-import People from './components/People'
 import AddPerson from './components/AddPerson'
 import Footer from './components/Footer'
+import Header from './components/Header'
 import LogPage from './components/LogPage'
-import {dateTime, JSON_API} from './Constants.js'
+import People from './components/People'
+import { dateTime, JSON_API } from './Constants.js'
 
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import {useEffect, useState} from 'react'
 
 
 function App() {
@@ -241,12 +241,15 @@ function App() {
 
     const updOwer = {
       ...ower,
-      owe: parseFloat(ower.owe) + parseFloat(info.amount)
+      owe: parseFloat(ower.owe) + parseFloat(info.amount),
+      personalLog: [...ower.personalLog, {id: ower.personalLog[ower.personalLog.length-1], log: ower.name + " owes " + payer.name + " " + info.amount}]
     }
     const updPayer = {
       ...payer, 
-      paidFor: parseFloat(payer.paidFor) + parseFloat(info.amount)
+      paidFor: parseFloat(payer.paidFor) + parseFloat(info.amount),
+      personalLog: [...ower.personalLog, ower.name + " owes " + payer.name + " " + info.amount]
     }
+    
 
     await fetch(
       `${JSON_API}/people/${updOwer.id}`, {
@@ -270,8 +273,8 @@ function App() {
     )
 
     setPeople(people.map((person) => 
-      person.name === updOwer.name ? {...person, owe : (parseFloat(person.owe) + parseFloat(info.amount)).toFixed(2)} : 
-      person.name === updPayer.name ? {...person, paidFor : (parseFloat(person.paidFor) + parseFloat(info.amount)) .toFixed(2)} :
+      person.name === updOwer.name ? {...person, owe : (parseFloat(person.owe) + parseFloat(info.amount)).toFixed(2), personalLog: [...ower.personalLog, ower.name + " owes " + payer.name + " " + info.amount]} : 
+      person.name === updPayer.name ? {...person, paidFor : (parseFloat(person.paidFor) + parseFloat(info.amount)) .toFixed(2), personalLog: [...ower.personalLog, ower.name + " owes " + payer.name + " " + info.amount]} :
       person
     ))
 
