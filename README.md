@@ -3,10 +3,6 @@
 Built for learning/practice purposes.&nbsp;
 Tracks who owes who how much.
 
-## Demo
-
-[Live Deployment](https://swxk19-react-expense-tracker.herokuapp.com/)
-
 ## Features
 
 1.  View/Add/Delete Expenses/Persons using a JSON database
